@@ -8,21 +8,33 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-   <span id="text"></span><span class="cursor">|</span>
+    <div>
+    <span id="text"></span><span class="cursor">|</span>
+  </div>
 
   <script>
     const text = "Coming soon...";
     let index = 0;
+    let isDeleting = false;
 
-    function typeEffect() {
-      if (index < text.length) {
-        document.getElementById("text").innerHTML += text.charAt(index);
+    function typeLoop() {
+      const currentText = text.substring(0, index);
+      document.getElementById("text").textContent = currentText;
+
+      if (!isDeleting && index < text.length) {
         index++;
-        setTimeout(typeEffect, 100);
+      } else if (isDeleting && index > 0) {
+        index--;
+      } else {
+        isDeleting = !isDeleting;
+        setTimeout(typeLoop, 800); // pause before switching
+        return;
       }
+
+      setTimeout(typeLoop, isDeleting ? 50 : 100);
     }
 
-    typeEffect();
+    typeLoop();
   </script>
 </body>
 </html>
