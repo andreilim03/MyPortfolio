@@ -8,6 +8,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Coming Soon</h1>
+   <span id="text"></span><span class="cursor">|</span>
+
+  <script>
+    const text = "Coming soon...";
+    let index = 0;
+
+    function typeEffect() {
+      if (index < text.length) {
+        document.getElementById("text").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+
+    typeEffect();
+  </script>
 </body>
 </html>
